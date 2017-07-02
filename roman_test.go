@@ -6,8 +6,8 @@ import (
 )
 
 var testCases = []struct {
-	arabic  int
-	roman string
+	arabic int
+	roman  string
 }{
 	{0, ""},
 	{1, "I"},
@@ -43,6 +43,8 @@ var testCases = []struct {
 	{2999, "MMCMXCIX"},
 	{3497, "MMMCDXCVII"},
 	{3999, "MMMCMXCIX"},
+	{-12, invalid},
+	{4000, invalid},
 }
 
 func TestToRoman(t *testing.T) {
@@ -58,6 +60,9 @@ func TestToRoman(t *testing.T) {
 
 func TestToArabic(t *testing.T) {
 	for _, test := range testCases {
+		if test.roman == invalid {
+			continue
+		}
 		t.Run(fmt.Sprintf("%s to %d", test.roman, test.arabic), func(t *testing.T) {
 			got := toArabic(test.roman)
 			if got != test.arabic {

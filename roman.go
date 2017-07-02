@@ -1,5 +1,7 @@
 package roman
 
+const invalid = "invalid value, roman numeral can only be between 0 and 3999"
+
 var romanMap = map[string]int{
 	"M":  1000,
 	"CM": 900,
@@ -22,9 +24,12 @@ func toArabic(r string) int {
 	}
 	return findString(r)
 }
+
 func toRoman(a int) string {
-	if a < 1 {
+	if a == 0 {
 		return ""
+	} else if a < 0 || a > 3999 {
+		return invalid
 	}
 
 	result, found := findInt(a)
